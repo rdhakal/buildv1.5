@@ -24,7 +24,7 @@ pipeline {
             }
         }
 //upload to artifact
-        stage ('upload') {
+        /*stage ('upload') {
             steps{
                 gitlabCommitStatus("upload") {
                     
@@ -55,6 +55,6 @@ pipeline {
                     server.publishBuildInfo buildInfo
                 }
             }
-        }
+        */}
     }
 }
