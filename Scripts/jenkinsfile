@@ -1,5 +1,17 @@
 pipeline {
     agent any
+                       rtServer (
+                                    id: "Artifactory-jfrog",
+                                    url: "http://10.147.17.23:8081/artifactory",
+                                    // using Artifacts username and password:
+                                    username: "admin",
+                                    password: "Computer1!"
+                                        bypassProxy: true
+                                    // Configure the connection timeout (in seconds).
+                                    // The default value (if not configured) is 300 seconds:
+                                    timeout = 300
+                                )
+ 
     stages {
         stage ('checkout') {
             steps{
@@ -9,8 +21,8 @@ pipeline {
         stage('Build') {    //maven build
             steps {
                 echo 'Building..'
-               sh 'mvn clean install'
-                
+             //  sh 'mvn clean install'
+                sh label: '', script: '''mvn clean install'''
             }
         }
         stage('Test') {
@@ -36,13 +48,13 @@ pipeline {
                         def uploadSpec = """{
                         "files": [
                         {
-                            "pattern": "**/target/*.jar",
+                            "pattern": "**//*target/*.jar",
                             "target": "libs-snapshot-local"
                         }, {
-                            "pattern": "**/target/*.pom",
+                            "pattern": "**//*target/*.pom",
                             "target": "libs-snapshot-local"
                         }, {
-                            "pattern": "**/target/*.war",
+                            "pattern": "**//*target/*.war",
                             "target": "libs-snapshot-local"
                         }
                         ]
@@ -55,5 +67,12 @@ pipeline {
                     server.publishBuildInfo buildInfo
                 }
             }*/
+        }
+ 
+        
+        post { 
+            always { 
+                cleanWs() //clean Workspace
+            }
         }
     }
