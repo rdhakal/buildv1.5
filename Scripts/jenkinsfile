@@ -54,7 +54,6 @@ pipeline {
                     // Publish build info.
                     server.publishBuildInfo buildInfo
                 }
-            }
-        */}
+            }*/
+        }
     }
-}
