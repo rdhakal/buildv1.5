@@ -23,7 +23,7 @@ pipeline {
                 echo 'Building..'
              //  sh 'mvn clean install'
                // sh label: '', script: '''mvn clean install'''
-                sh './build.sh'
+                sh './Scripts/build.sh'
             }
         }
         stage('Test') {
