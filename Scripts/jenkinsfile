@@ -22,8 +22,8 @@ pipeline {
             steps {
                 echo 'Building..'
              //  sh 'mvn clean install'
-               // sh label: '', script: '''mvn clean install'''
-                sh './Scripts/build.sh'
+                sh label: '', script: '''mvn clean install'''
+               // sh './Scripts/build.sh'
             }
         }
         stage('Test') {
