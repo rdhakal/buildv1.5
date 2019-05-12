@@ -1,6 +1,6 @@
 pipeline {
     agent any
-                       rtServer (
+                   /*    rtServer (
                                     id: "Artifactory-jfrog",
                                     url: "http://10.147.17.23:8081/artifactory",
                                     // using Artifacts username and password:
@@ -10,7 +10,7 @@ pipeline {
                                     // Configure the connection timeout (in seconds).
                                     // The default value (if not configured) is 300 seconds:
                                     timeout = 300
-                                )
+                                ) */
  
     stages {
         stage ('checkout') {
@@ -22,7 +22,8 @@ pipeline {
             steps {
                 echo 'Building..'
              //  sh 'mvn clean install'
-                sh label: '', script: '''mvn clean install'''
+               // sh label: '', script: '''mvn clean install'''
+                sh './build.sh'
             }
         }
         stage('Test') {
