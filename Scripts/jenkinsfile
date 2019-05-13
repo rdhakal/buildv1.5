@@ -26,13 +26,14 @@ pipeline {
                sh 'bash ./Scripts/build.sh' // builds jar using build script
             }
         }
+            stage('Test') {
                def remote = [:]
                 remote.name = 'docker'
                 remote.host = '10.147.17.212'
                 remote.user = 'root'
                 remote.password = 'Computer1!'
                 remote.allowAnyHosts = true
-        stage('Test') {
+        
             steps {
             echo 'Testing..'
             //deploy to docker container to test the functionality of the server
