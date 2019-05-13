@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent none
                    /*    rtServer (
                                     id: "Artifactory-jfrog",
                                     url: "http://10.147.17.23:8081/artifactory",
@@ -11,13 +11,7 @@ pipeline {
                                     // The default value (if not configured) is 300 seconds:
                                     timeout = 300
                                 ) */
-                def remote = [:]
-                remote.name = 'docker'
-                remote.host = '10.147.17.212'
-                remote.user = 'root'
-                remote.password = 'Computer1!'
-                remote.allowAnyHosts = true
- 
+              
     stages {
         stage ('checkout') {
             steps{
@@ -33,14 +27,21 @@ pipeline {
             }
         }
             stage('Test') {
-                   
+            node{
+                def remote = [:]
+                remote.name = 'docker'
+                remote.host = '10.147.17.212'
+                remote.user = 'root'
+                remote.password = 'Computer1!'
+                remote.allowAnyHosts = true
+   
             steps {
             echo 'Testing..'
             //deploy to docker container to test the functionality of the server
             writeFile file: '/Script/test.sh', text: 'ls -lrt'
             sshScript remote: remote, script: "test.sh"
     
-                    }
+             } }
         }
         stage('Deploy') {
             steps {
