@@ -29,7 +29,7 @@ pipeline {
             stage('Test') {
              steps {
             echo 'Testing..'
-           node{
+           node('docker'){
                 def remote = [:]
                 remote.name = 'docker'
                 remote.host = '10.147.17.212'
