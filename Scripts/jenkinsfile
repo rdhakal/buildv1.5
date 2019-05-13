@@ -38,7 +38,7 @@ pipeline {
             //deploy to docker container to test the functionality of the server
             writeFile file: '/Script/test.sh', text: 'ls -lrt'
             sshScript remote: remote, script: "test.sh"
-    }
+    
                     }
         }
         stage('Deploy') {
