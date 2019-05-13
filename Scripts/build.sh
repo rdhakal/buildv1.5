@@ -1,3 +1,3 @@
 #!/bin/bqash
 mvn clean
-mvn insatll
+mvn install
